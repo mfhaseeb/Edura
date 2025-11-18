@@ -209,6 +209,19 @@
       font-weight: 600;
     }
 
+    /* --- DYNAMIC BACKGROUND --- */
+    .dynamic-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1.5s ease-in-out;
+      opacity: 0.03;
+    }
 
     /* --- SIGNUP --- */
     #signup.card-wrap{max-width:680px;margin:0 auto;text-align:center;padding:40px 60px;}
@@ -274,6 +287,8 @@
   </style>
 </head>
 <body>
+  <!-- Dynamic Background Element -->
+  <div class="dynamic-bg" id="dynamicBg"></div>
 
 <header>
   <div class="brand">
@@ -303,9 +318,9 @@
 </header>
 
 <section class="slideshow" id="home">
-  <div class="slide" style="background-image:url('images/slide1-university-campus.jpg')"></div>
-  <div class="slide" style="background-image:url('images/slide2-students-studying.jpg')"></div>
-  <div class="slide" style="background-image:url('images/slide3-lecture-hall.jpg')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1524178239883-6a6d47ce5c39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"></div>
   <div class="hero-overlay"></div>
   <div class="slideshow-content container">
     <h1>Learn Smarter. Achieve More.</h1>
@@ -342,6 +357,15 @@
         <p style="color:var(--muted); margin-top: 15px;">
           Founded by a team of academics and tech innovators, Edura bridges the gap between traditional teaching and modern digital access. We are committed to providing high-quality, affordable resources that fit the hectic schedule of a college student. Join thousands of students who are transforming their grades and achieving their academic goals with Edura.
         </p>
+        <div style="margin-top: 20px; padding: 20px; background-color: var(--bg); border-radius: var(--radius-default); border-left: 4px solid var(--accent);">
+          <h3 style="margin-top: 0; color: var(--primary);">Our Approach</h3>
+          <p style="margin-bottom: 10px;">We focus on three core principles:</p>
+          <ul style="padding-left: 20px; color: var(--muted);">
+            <li><strong>Content Quality:</strong> All materials are created by subject matter experts with university teaching experience</li>
+            <li><strong>Learning Efficiency:</strong> Structured content that maximizes retention and understanding</li>
+            <li><strong>Accessibility:</strong> Affordable pricing and mobile-friendly platform for learning anywhere</li>
+          </ul>
+        </div>
       </div>
       <div class="stats">
         <div class="stat-item">
@@ -355,6 +379,10 @@
         <div class="stat-item">
           <h4>92%</h4>
           <p>Exam Success Rate</p>
+        </div>
+        <div class="stat-item">
+          <h4>15+</h4>
+          <p>University Partners</p>
         </div>
       </div>
     </div>
@@ -379,10 +407,14 @@
     <div class="courses" id="coursesList" style="display:none;">
 
       <article class="course-card" data-id="course-psyc" data-title="B.A. (Hons) Psychology" data-price="549" data-desc="Explore the mind: Foundations of Psychology, Social Behavior, Development, and Quantitative Methods for research." data-topics="Foundations of Psychology, Social Behavior, Development, Quantitative Methods">
-        <img src="courses/psychology.jpg" alt="Illustrated diagram showing the core topics in Psychology like the brain, social interaction, and data analysis" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Illustrated diagram showing the core topics in Psychology like the brain, social interaction, and data analysis" loading="lazy">
         <div class="body">
           <h3>B.A. (Hons) Psychology</h3>
           <p>Explore the mind: <strong>Foundations of Psychology</strong>, Social Behavior, Development, and Quantitative Methods for research.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">6 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">45+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹549</button>
@@ -391,10 +423,14 @@
       </article>
 
       <article class="course-card" data-id="course-bcom-hons" data-title="B.Com (Hons)" data-price="699" data-desc="Essential modules in Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, and Financial Management." data-topics="Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, Financial Management">
-        <img src="courses/bcom.jpg" alt="A calculator, pen, and stacks of currency, symbolizing Financial Accounting and Corporate Law." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1911&q=80" alt="A calculator, pen, and stacks of currency, symbolizing Financial Accounting and Corporate Law." loading="lazy">
         <div class="body">
           <h3>B.Com (Hons)</h3>
           <p>Essential modules in <strong>Financial Accounting</strong>, Corporate Law, Business Statistics, Income Tax Law, and Financial Management.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">8 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">60+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹699</button>
@@ -403,10 +439,14 @@
       </article>
 
       <article class="course-card" data-id="course-physics" data-title="B.Sc (Hons) Physics" data-price="599" data-desc="Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational Quantum Mechanics." data-topics="Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, Quantum Mechanics">
-        <img src="courses/physics.jpg" alt="A conceptual drawing of a wave function and a particle, representing Quantum Mechanics and waves." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="A conceptual drawing of a wave function and a particle, representing Quantum Mechanics and waves." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Physics</h3>
           <p>Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational <strong>Quantum Mechanics</strong>.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">7 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">50+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹599</button>
@@ -415,10 +455,14 @@
       </article>
 
       <article class="course-card" data-id="course-ps" data-title="B.A Political Science (Hons)" data-price="499" data-desc="Key topics including Indian Government & Politics, Political Theory, Comparative Politics, and International Relations." data-topics="Indian Government & Politics, Political Theory, Comparative Politics, International Relations">
-        <img src="courses/polisci.jpg" alt="A gavel and constitution book, symbolizing Indian Government and Institutional Studies." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="A gavel and constitution book, symbolizing Indian Government and Institutional Studies." loading="lazy">
         <div class="body">
           <h3>B.A Political Science (Hons)</h3>
           <p>Key topics including <strong>Indian Government & Politics</strong>, Political Theory, Comparative Politics, and International Relations.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">5 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">40+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -427,10 +471,14 @@
       </article>
 
       <article class="course-card" data-id="course-chem" data-title="B.Sc (Hons) Chemistry" data-price="549" data-desc="Comprehensive coverage of Physical, Organic, and Inorganic Chemistry, including Spectroscopy and Thermodynamics." data-topics="Physical Chemistry, Organic Chemistry, Inorganic Chemistry, Spectroscopy, Thermodynamics">
-        <img src="courses/chemistry.jpg" alt="Molecular diagrams and beakers with colorful solutions, representing Organic and Inorganic Chemistry." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Molecular diagrams and beakers with colorful solutions, representing Organic and Inorganic Chemistry." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Chemistry</h3>
           <p>Comprehensive coverage of <strong>Physical, Organic, and Inorganic Chemistry</strong>, including Spectroscopy and Thermodynamics.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">6 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">55+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹549</button>
@@ -439,10 +487,14 @@
       </article>
 
       <article class="course-card" data-id="course-eco-hons" data-title="B.A Economics (Hons)" data-price="599" data-desc="Core modules in Micro, Macro, Mathematical Methods, Statistics & Econometrics, and Development Economics." data-topics="Microeconomics, Macroeconomics, Mathematical Methods, Statistics & Econometrics, Development Economics">
-        <img src="courses/economics.jpg" alt="Supply and demand charts with mathematical formulas, highlighting Micro and Macro Economics." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Supply and demand charts with mathematical formulas, highlighting Micro and Macro Economics." loading="lazy">
         <div class="body">
           <h3>B.A Economics (Hons)</h3>
           <p>Core modules in <strong>Micro, Macro</strong>, Mathematical Methods, Statistics & Econometrics, and Development Economics.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">7 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">50+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹599</button>
@@ -451,10 +503,14 @@
       </article>
 
       <article class="course-card" data-id="course-buseco" data-title="B.A. (Hons) Business Economics" data-price="649" data-desc="Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate Business Strategy." data-topics="Business Statistics, International Trade, Financial Markets, Business Strategy">
-        <img src="courses/buseco.jpg" alt="A chessboard and bar charts, representing Business Strategy and Financial Markets." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="A chessboard and bar charts, representing Business Strategy and Financial Markets." loading="lazy">
         <div class="body">
           <h3>B.A. (Hons) Business Economics</h3>
           <p>Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate <strong>Business Strategy</strong>.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">6 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">45+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹649</button>
@@ -463,10 +519,14 @@
       </article>
 
       <article class="course-card" data-id="course-zoology" data-title="B.Sc (Hons) Zoology" data-price="499" data-desc="Core concepts in Cell Biology, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals." data-topics="Cell Biology, Genetics, Animal Physiology, Ecology, Development">
-        <img src="courses/zoology.jpg" alt="A magnified image of a biological cell and a DNA double helix, symbolizing Cell Biology and Genetics." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="A magnified image of a biological cell and a DNA double helix, symbolizing Cell Biology and Genetics." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Zoology</h3>
           <p>Core concepts in <strong>Cell Biology</strong>, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">5 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">40+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -475,10 +535,14 @@
       </article>
 
       <article class="course-card" data-id="course-his" data-title="B.A History (Hons)" data-price="449" data-desc="Detailed studies on Ancient, Medieval, and Modern India, along with World History and Historiography." data-topics="Ancient India, Medieval India, Modern India, World History, Historiography">
-        <img src="courses/history.jpg" alt="Ancient scrolls, pyramids, and a historical timeline, representing the study of Ancient and Modern India." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2028&q=80" alt="Ancient scrolls, pyramids, and a historical timeline, representing the study of Ancient and Modern India." loading="lazy">
         <div class="body">
           <h3>B.A History (Hons)</h3>
           <p>Detailed studies on <strong>Ancient, Medieval, and Modern India</strong>, along with World History and Historiography.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">5 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">35+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹449</button>
@@ -487,10 +551,14 @@
       </article>
 
       <article class="course-card" data-id="course-envsci" data-title="B.Sc (Hons) Environmental Science" data-price="499" data-desc="Modules on Environmental Chemistry, Ecology, Climate Change, Pollution Studies, and Biodiversity Conservation." data-topics="Environmental Chemistry, Ecology, Climate Change, Pollution Studies, Biodiversity Conservation">
-        <img src="courses/envsci.jpg" alt="A stylized image of a wind turbine and green landscape, focusing on Climate Change and Ecology." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" alt="A stylized image of a wind turbine and green landscape, focusing on Climate Change and Ecology." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Environmental Science</h3>
           <p>Modules on Environmental Chemistry, Ecology, <strong>Climate Change</strong>, Pollution Studies, and Biodiversity Conservation.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">6 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">45+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -499,10 +567,14 @@
       </article>
       
       <article class="course-card" data-id="course-baprog-eco" data-title="B.A. (Programme) Economics" data-price="399" data-desc="Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and Money & Banking." data-topics="Microeconomics, Macroeconomics, Indian Economy, Money & Banking">
-        <img src="courses/ba-prog-eco.jpg" alt="A stack of Indian currency notes and coins, symbolizing the Indian Economy and Money & Banking." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="A stack of Indian currency notes and coins, symbolizing the Indian Economy and Money & Banking." loading="lazy">
         <div class="body">
           <h3>B.A. (Programme) Economics</h3>
           <p>Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and <strong>Money & Banking</strong>.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">4 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">30+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹399</button>
@@ -511,10 +583,14 @@
       </article>
       
       <article class="course-card" data-id="course-bsc-prog" data-title="B.Sc (Programme) Physical Sciences" data-price="449" data-desc="Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential programming skills." data-topics="Basic Physics, Chemistry/Electronics/CS, Calculus, Programming Skills">
-        <img src="courses/bsc-prog.jpg" alt="A computer screen showing code and a circuit board, representing Programming Skills and Electronics." loading="lazy">
+        <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="A computer screen showing code and a circuit board, representing Programming Skills and Electronics." loading="lazy">
         <div class="body">
           <h3>B.Sc (Programme) Physical Sciences</h3>
           <p>Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential <strong>programming skills</strong>.</p>
+          <div style="margin-top: 10px; font-size: 0.85rem; color: var(--muted);">
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">5 Modules</span>
+            <span style="background: var(--bg); padding: 4px 8px; border-radius: 4px;">35+ Video Lessons</span>
+          </div>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹449</button>
@@ -538,7 +614,13 @@
       <li>High-Quality Video Lessons</li>
       <li>Concise Revision Notes</li>
       <li>Unlimited Practice Tests & Quizzes</li>
+      <li>Interactive Learning Activities</li>
+      <li>24/7 Access to Course Materials</li>
     </ul>
+    <div style="margin-top: 20px; padding: 15px; background-color: var(--bg); border-radius: var(--radius-default);">
+      <h4 style="margin: 0 0 10px; color: var(--primary);">What You'll Achieve:</h4>
+      <p style="margin: 0; color: var(--muted);">By completing this course, you'll gain comprehensive knowledge of the subject, develop critical thinking skills, and be fully prepared for your university examinations.</p>
+    </div>
     <button class="add-cart-btn" id="detailsAddCart" style="margin-top:20px;padding:14px;">Add to Cart</button>
     <a class="btn back-btn" onclick="showCourses()" style="margin-top:10px;background:var(--bg);color:var(--primary);border:1px solid var(--border-color);">Back to Courses</a>
   </div>
@@ -555,16 +637,43 @@
         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Premium Courses Icon" loading="lazy">
         <h3>Premium Courses</h3>
         <p>Structured, <strong>exam-oriented courses</strong> taught by experienced university tutors and subject matter experts. Full syllabus coverage guaranteed.</p>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: var(--muted);">
+          <p><strong>Includes:</strong> Detailed lesson plans, practice questions, and exam strategies</p>
+        </div>
       </div>
       <div class="feature-card">
         <img src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" alt="Smart Notes & Videos" loading="lazy">
         <h3>Smart Notes & Videos</h3>
         <p>Concise summaries, formula sheets, and mind maps for rapid revision before exams. Every note is linked to a <strong>high-quality video lecture</strong>.</p>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: var(--muted);">
+          <p><strong>Features:</strong> Downloadable content, mobile-friendly format, and search functionality</p>
+        </div>
       </div>
       <div class="feature-card">
         <img src="https://cdn-icons-png.flaticon.com/512/2117/2117865.png" alt="Practice Tests Icon" loading="lazy">
         <h3>Targeted Practice</h3>
         <p>Unlimited practice tests and quizzes that simulate the university exam environment for guaranteed success. <strong>Track your weak points</strong> and improve efficiently.</p>
+        <div style="margin-top: 15px; font-size: 0.85rem; color: var(--muted);">
+          <p><strong>Benefits:</strong> Performance analytics, timed tests, and detailed solutions</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 40px; padding: 20px; background-color: var(--bg); border-radius: var(--radius-default); text-align: center;">
+      <h3 style="color: var(--primary); margin-top: 0;">Our Learning Methodology</h3>
+      <p style="color: var(--muted); margin-bottom: 15px;">We follow a proven 3-step approach to maximize learning outcomes:</p>
+      <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+        <div style="flex: 1; min-width: 200px;">
+          <h4 style="color: var(--accent); margin-bottom: 8px;">1. Learn</h4>
+          <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">Engage with comprehensive video lessons and study materials</p>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+          <h4 style="color: var(--accent); margin-bottom: 8px;">2. Practice</h4>
+          <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">Apply knowledge through targeted exercises and quizzes</p>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+          <h4 style="color: var(--accent); margin-bottom: 8px;">3. Master</h4>
+          <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">Reinforce learning with revision tools and mock exams</p>
+        </div>
       </div>
     </div>
   </div>
@@ -583,6 +692,15 @@
         <button id="createAccount" class="btn-primary">Create Your Free Account</button>
       </div>
     </div>
+    <div style="margin-top: 30px; padding: 20px; background-color: var(--bg); border-radius: var(--radius-default);">
+      <h3 style="color: var(--primary); margin-top: 0;">What You Get With Your Free Account:</h3>
+      <ul style="padding-left: 20px; color: var(--muted);">
+        <li>Access to course previews and sample materials</li>
+        <li>Personalized course recommendations</li>
+        <li>Progress tracking across all enrolled courses</li>
+        <li>Regular updates on new courses and features</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -593,6 +711,29 @@
 </footer>
 
 <script>
+  // --- Dynamic Background Functionality ---
+  const dynamicBg = document.getElementById('dynamicBg');
+  const bgImages = [
+    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1524178239883-6a6d47ce5c39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+    'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'
+  ];
+  
+  let currentBgIndex = 0;
+  
+  function changeBackground() {
+    currentBgIndex = (currentBgIndex + 1) % bgImages.length;
+    dynamicBg.style.backgroundImage = `url('${bgImages[currentBgIndex]}')`;
+  }
+  
+  // Change background every 8 seconds
+  setInterval(changeBackground, 8000);
+  
+  // Set initial background
+  dynamicBg.style.backgroundImage = `url('${bgImages[0]}')`;
+
   // --- Slideshow Script ---
   let slideIndex = 0;
   const slides = document.querySelectorAll('.slide');
