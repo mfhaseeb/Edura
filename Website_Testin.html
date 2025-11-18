@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Edura - Learn Better, Learn Smart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* 🎨 MODERN COLOR PALETTE & TYPOGRAPHY */
+    html{scroll-behavior:smooth;scroll-padding-top:80px;font-size:16px;}
+    :root{
+      --primary:#0056D6; /* Richer Blue */
+      --accent:#FF4500; /* Richer Orange/Red for Action */
+      --muted:#5D697C; /* Darker, more readable gray */
+      --bg:#F7F8FA; /* Very light, soft background */
+      --card:#ffffff;
+      --border-color:#E8EAEF; /* Light border for modern look */
+      --shadow-subtle:0 2px 10px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+      --radius-default:8px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:var(--bg);
+      color:#1A1A1A;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* --- GLOBAL COMPONENTS --- */
+    .btn{
+      padding:12px 24px;
+      background:var(--accent);
+      color:white;
+      font-weight:600;
+      border-radius:var(--radius-default);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      transition:background 0.2s, box-shadow 0.2s;
+      border:none;
+      cursor:pointer;
+    }
+    .btn:hover{background:#E64000; box-shadow:0 4px 15px rgba(255, 69, 0, 0.3);}
+    .btn-primary{background:var(--primary);color:white;padding:12px 20px;border-radius:var(--radius-default);border:0;font-weight:600;cursor:pointer;transition:0.2s;}
+    .btn-primary:hover{background:#0047b3}
+    .btn-outline{background:transparent;border:1px solid var(--border-color);color:var(--muted);padding:10px 16px;border-radius:var(--radius-default);cursor:pointer;font-weight:500;transition:0.2s;}
+    .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+
+    /* --- HEADER --- */
+    header{
+      position:sticky;top:0;z-index:1000;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:16px 40px; /* Increased padding */
+      background:var(--card);
+      box-shadow:var(--shadow-subtle); /* More subtle shadow */
+      border-bottom:1px solid var(--border-color);
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:36px;height:36px;
+      border-radius:6px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(45deg,var(--primary),#00c2ff);
+      color:white;font-weight:700;font-size:20px;
+    }
+    .brand h1{margin:0;font-size:22px;color:var(--primary);font-weight:700;}
+    .brand p{margin:0;font-size:13px;color:var(--muted);font-weight:500;}
+
+    nav{display:flex;align-items:center;gap:10px}
+    nav a{color:var(--muted);font-weight:500;text-decoration:none;padding:8px 14px;border-radius:6px;transition:all .2s}
+    nav a:hover{background:var(--bg);color:var(--primary)}
+    .cart-wrap{display:flex;align-items:center;gap:10px;position:relative}
+    .cart-btn{
+      background:var(--bg);border:1px solid var(--border-color);
+      cursor:pointer;padding:8px;
+      display:flex;align-items:center;border-radius:var(--radius-default);
+      transition:0.2s;
+    }
+    .cart-btn:hover{background:var(--border-color)}
+    .cart-icon{width:24px;height:24px}
+    .cart-icon path, .cart-icon circle{stroke:var(--primary); fill:var(--primary);} /* Ensure SVG color matches primary */
+    .cart-badge{position:absolute;top:-4px;right:-4px;background:var(--accent);color:white;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;padding:2px;box-shadow:0 2px 6px rgba(255, 69, 0, 0.3);}
+    
+    /* --- CART DRAWER --- */
+    .cart-drawer{position:fixed;right:20px;top:80px;width:340px;max-height:80vh;background:var(--card);box-shadow:0 15px 35px rgba(2,6,23,0.1);border-radius:12px;overflow:auto;transform:translateY(-10px) scale(.98);opacity:0;pointer-events:none;transition:all .22s;z-index:1100;border:1px solid var(--border-color);}
+    .cart-drawer.open{transform:none;opacity:1;pointer-events:auto}
+    .cart-drawer .head{padding:14px 18px;border-bottom:1px solid var(--border-color);font-weight:600;font-size:18px;color:var(--primary)}
+    .cart-drawer .items{padding:16px}
+    .cart-item{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--border-color)}
+    .cart-item:last-child{border-bottom:0}
+    /* Set a placeholder style for image tags */
+    .cart-item img{width:60px;height:44px;object-fit:cover;border-radius:4px;border:1px solid var(--border-color); background-color: var(--bg);} 
+    .course-card img{width:100%;height:200px;object-fit:cover;display:block; background-color: var(--bg); border-bottom: 1px solid var(--border-color);}
+
+    .cart-item .meta{flex:1}
+    .cart-item .meta h4{margin:0;font-size:15px;color:#333;font-weight:600;}
+    .cart-item .meta p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+    .cart-drawer .footer{padding:16px 18px;border-top:1px solid var(--border-color);display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+    /* --- SLIDESHOW / HERO --- */
+    .slideshow{position:relative;height:70vh;overflow:hidden;margin-bottom:40px;}
+    .slide{position:absolute;left:0;top:0;width:100%;height:100%;background-size:cover;background-position:center center;opacity:0;transition:opacity 1s ease-in-out;}
+    .slide.show{opacity:1}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.5));}
+    .slideshow-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;color:white;text-align:center;padding:0 20px;text-shadow:0 4px 10px rgba(0,0,0,0.3);}
+    .slideshow-content h1{font-size:3.2rem;margin:0 0 10px;line-height:1.1;font-weight:700;}
+    .slideshow-content p{font-size:1.15rem;margin:0 0 24px;color:rgba(255,255,255,0.95);font-weight:400;}
+    .hero-btn-secondary{background:rgba(255,255,255,0.15)!important;color:white!important;box-shadow:none!important;border:1px solid rgba(255,255,255,0.5);transition:0.2s;}
+    .hero-btn-secondary:hover{background:rgba(255,255,255,0.25)!important;}
+
+    /* --- LAYOUT & SECTIONS --- */
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .section{padding:60px 0}
+    .section h2{font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:10px;}
+    .card-wrap{
+      background:var(--card);
+      padding:40px; /* Increased padding */
+      border-radius:12px;
+      box-shadow:var(--shadow-subtle);
+      border:1px solid var(--border-color);
+    }
+    
+    /* --- COURSES --- */
+    .courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+    .course-card{
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:var(--shadow-subtle);
+      border:1px solid var(--border-color);
+      display:flex;flex-direction:column;
+      transition:transform 0.3s;
+      cursor:pointer;
+    }
+    .course-card:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,0,0,0.08);}
+    .course-card .body{padding:20px;flex:1;display:flex;flex-direction:column}
+    .course-card h3{margin:0;color:var(--primary);font-size:1.25rem;font-weight:600;}
+    .course-card p{color:var(--muted);font-size:0.95rem;margin:10px 0 0;flex:1}
+    .course-card .actions{
+      padding:16px 20px;
+      border-top:1px solid var(--border-color);
+      background:var(--bg); /* Light gray for separation */
+      display:flex;gap:12px;
+    }
+    .add-cart-btn{flex:1;background:var(--accent);color:white;padding:12px;border-radius:8px;border:0;font-weight:600;cursor:pointer;transition:0.2s;}
+    .add-cart-btn:hover{background:#E64000;}
+    .view-btn{
+      background:transparent;
+      border:1px solid var(--border-color);
+      padding:12px;
+      border-radius:8px;
+      cursor:pointer;
+      color:var(--primary);
+      font-weight:600;
+      transition:0.2s;
+    }
+    .view-btn:hover{background:var(--border-color)}
+
+    /* --- SIGNUP --- */
+    #signup.card-wrap{max-width:680px;margin:0 auto;text-align:center;padding:40px 60px;}
+    #signup input{width:100%;padding:14px;margin:10px 0;border-radius:8px;border:1px solid var(--border-color);font-size:1rem;color:#333;}
+    #signup input:focus{border-color:var(--primary);outline:none;}
+    #createAccount{width:100%;margin-top:10px;}
+
+    /* --- FEATURES --- */
+    .features-container{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+    .feature-card{
+      width:320px;
+      background:var(--card);
+      padding:30px;
+      border-radius:12px;
+      box-shadow:var(--shadow-subtle);
+      border:1px solid var(--border-color);
+      text-align:center;
+      transition:0.2s;
+    }
+    .feature-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.08);}
+    .feature-card img{width:64px;height:64px;margin-bottom:16px}
+    .feature-card h3{margin:4px 0 8px;color:var(--primary);font-size:1.15rem;font-weight:600;}
+    .feature-card p{color:var(--muted);font-size:0.9rem;}
+
+    /* --- RESPONSIVE ADJUSTMENTS --- */
+    @media (max-width:1024px){
+      header{padding:14px 20px;}
+      .slideshow-content h1{font-size:2.5rem}
+    }
+    @media (max-width:768px){
+      .slideshow{height:60vh;}
+      .slideshow-content h1{font-size:2rem;margin-bottom:8px;}
+      .slideshow-content p{font-size:1rem;margin-bottom:18px;}
+      .course-card{width:100%}
+      .features-container{flex-direction:column;align-items:center}
+      #signup.card-wrap{padding:30px 20px;}
+      .cart-drawer{right:12px;left:12px;width:auto}
+    }
+    @media (max-width:600px){
+      header{flex-wrap:wrap;justify-content:center;gap:12px;}
+      nav{width:100%;justify-content:space-around;gap:0;}
+      .cart-wrap{margin-left:0;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">E</div>
+    <div>
+      <h1>Edura</h1>
+      <p>Smart Digital Learning</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#features">Features</a>
+    <a href="#signup">Signup</a>
+    <div class="cart-wrap">
+      <button class="cart-btn" id="openCart" aria-label="Open cart">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none">
+          <path d="M3 3h2l.4 2M7 13h10l3-8H6.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="10" cy="20" r="1.5" fill="currentColor"/>
+          <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="cart-badge" id="cartCount" style="display:none">0</div>
+    </div>
+  </nav>
+</header>
+
+<section class="slideshow" id="home">
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop')"></div>
+  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop')"></div>
+  <div class="hero-overlay"></div>
+  <div class="slideshow-content container">
+    <h1>Learn Smarter. Achieve More.</h1>
+    <p>Your digital companion for university success — video lectures, comprehensive notes, and personalized practice tests.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a class="btn" href="#courses">Explore Courses</a>
+      <a class="btn hero-btn-secondary" href="#features">Why Edura?</a>
+    </div>
+  </div>
+</section>
+
+<div class="cart-drawer" id="cartDrawer" aria-hidden="true">
+  <div class="head">Your Cart</div>
+  <div class="items" id="cartItems"><div style="padding:16px;color:var(--muted);text-align:center;">Your cart is empty.</div></div>
+  <div class="footer">
+    <div style="font-weight:700">Total: <span id="cartTotal">₹0</span></div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-outline" id="clearCart">Clear</button>
+      <button class="btn-primary" id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+<section class="section" id="courses">
+  <div class="card-wrap" id="coursesCardWrap">
+    <h2>University Course Catalog</h2>
+    <p style="margin:0 0 30px;color:var(--muted);font-size:1.05rem;" id="course-section-p">Choose a course to get started — all content focused for university exams.</p>
+    
+    <button class="btn-primary" id="revealCoursesBtn" style="width:100%; margin-bottom: 30px; padding: 14px; font-size: 1.1rem; display: block;">
+      Click to Explore All 12 Courses
+    </button>
+    
+    <button class="btn-outline" id="collapseCoursesBtn" onclick="hideCourses()" style="width:100%; margin-bottom: 30px; padding: 14px; font-size: 1.1rem; display:none; color: var(--accent); border-color: var(--accent);">
+      Collapse Course List
+    </button>
+
+    <div class="courses" id="coursesList" style="display:none;">
+
+      <article class="course-card" data-id="course-psyc" data-title="B.A. (Hons) Psychology" data-price="549" data-desc="Explore the mind: Foundations of Psychology, Social Behavior, Development, and Quantitative Methods for research." data-topics="Foundations of Psychology, Social Behavior, Development, Quantitative Methods">
+        
+        <div class="body">
+          <h3>B.A. (Hons) Psychology</h3>
+          <p>Explore the mind: **Foundations of Psychology**, Social Behavior, Development, and Quantitative Methods for research.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹549</button>
+          <button class="view-btn" data-id="course-psyc">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-bcom-hons" data-title="B.Com (Hons)" data-price="699" data-desc="Essential modules in Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, and Financial Management." data-topics="Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, Financial Management">
+        
+        <div class="body">
+          <h3>B.Com (Hons)</h3>
+          <p>Essential modules in **Financial Accounting**, Corporate Law, Business Statistics, Income Tax Law, and Financial Management.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹699</button>
+          <button class="view-btn" data-id="course-bcom-hons">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-physics" data-title="B.Sc (Hons) Physics" data-price="599" data-desc="Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational Quantum Mechanics." data-topics="Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, Quantum Mechanics">
+        
+        <div class="body">
+          <h3>B.Sc (Hons) Physics</h3>
+          <p>Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational **Quantum Mechanics**.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹599</button>
+          <button class="view-btn" data-id="course-physics">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-ps" data-title="B.A Political Science (Hons)" data-price="499" data-desc="Key topics including Indian Government & Politics, Political Theory, Comparative Politics, and International Relations." data-topics="Indian Government & Politics, Political Theory, Comparative Politics, International Relations">
+        
+        <div class="body">
+          <h3>B.A Political Science (Hons)</h3>
+          <p>Key topics including **Indian Government & Politics**, Political Theory, Comparative Politics, and International Relations.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹499</button>
+          <button class="view-btn" data-id="course-ps">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-chem" data-title="B.Sc (Hons) Chemistry" data-price="549" data-desc="Comprehensive coverage of Physical, Organic, and Inorganic Chemistry, including Spectroscopy and Thermodynamics." data-topics="Physical Chemistry, Organic Chemistry, Inorganic Chemistry, Spectroscopy, Thermodynamics">
+        
+        <div class="body">
+          <h3>B.Sc (Hons) Chemistry</h3>
+          <p>Comprehensive coverage of **Physical, Organic, and Inorganic Chemistry**, including Spectroscopy and Thermodynamics.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹549</button>
+          <button class="view-btn" data-id="course-chem">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-eco-hons" data-title="B.A Economics (Hons)" data-price="599" data-desc="Core modules in Micro, Macro, Mathematical Methods, Statistics & Econometrics, and Development Economics." data-topics="Microeconomics, Macroeconomics, Mathematical Methods, Statistics & Econometrics, Development Economics">
+        
+        <div class="body">
+          <h3>B.A Economics (Hons)</h3>
+          <p>Core modules in **Micro, Macro**, Mathematical Methods, Statistics & Econometrics, and Development Economics.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹599</button>
+          <button class="view-btn" data-id="course-eco-hons">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-buseco" data-title="B.A. (Hons) Business Economics" data-price="649" data-desc="Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate Business Strategy." data-topics="Business Statistics, International Trade, Financial Markets, Business Strategy">
+        
+
+[Image of B.A. (Hons) Business Economics strategy and markets]
+
+        <div class="body">
+          <h3>B.A. (Hons) Business Economics</h3>
+          <p>Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate **Business Strategy**.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹649</button>
+          <button class="view-btn" data-id="course-buseco">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-zoology" data-title="B.Sc (Hons) Zoology" data-price="499" data-desc="Core concepts in Cell Biology, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals." data-topics="Cell Biology, Genetics, Animal Physiology, Ecology, Development">
+        
+
+[Image of B.Sc (Hons) Zoology Cell Biology and Genetics]
+
+        <div class="body">
+          <h3>B.Sc (Hons) Zoology</h3>
+          <p>Core concepts in **Cell Biology**, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹499</button>
+          <button class="view-btn" data-id="course-zoology">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-his" data-title="B.A History (Hons)" data-price="449" data-desc="Detailed studies on Ancient, Medieval, and Modern India, along with World History and Historiography." data-topics="Ancient India, Medieval India, Modern India, World History, Historiography">
+        
+        <div class="body">
+          <h3>B.A History (Hons)</h3>
+          <p>Detailed studies on **Ancient, Medieval, and Modern India**, along with World History and Historiography.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹449</button>
+          <button class="view-btn" data-id="course-his">View Details</button>
+        </div>
+      </article>
+
+      <article class="course-card" data-id="course-envsci" data-title="B.Sc (Hons) Environmental Science" data-price="499" data-desc="Modules on Environmental Chemistry, Ecology, Climate Change, Pollution Studies, and Biodiversity Conservation." data-topics="Environmental Chemistry, Ecology, Climate Change, Pollution Studies, Biodiversity Conservation">
+        
+        <div class="body">
+          <h3>B.Sc (Hons) Environmental Science</h3>
+          <p>Modules on Environmental Chemistry, Ecology, **Climate Change**, Pollution Studies, and Biodiversity Conservation.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹499</button>
+          <button class="view-btn" data-id="course-envsci">View Details</button>
+        </div>
+      </article>
+      
+      <article class="course-card" data-id="course-baprog-eco" data-title="B.A. (Programme) Economics" data-price="399" data-desc="Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and Money & Banking." data-topics="Microeconomics, Macroeconomics, Indian Economy, Money & Banking">
+        
+        <div class="body">
+          <h3>B.A. (Programme) Economics</h3>
+          <p>Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and **Money & Banking**.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹399</button>
+          <button class="view-btn" data-id="course-baprog-eco">View Details</button>
+        </div>
+      </article>
+      
+      <article class="course-card" data-id="course-bsc-prog" data-title="B.Sc (Programme) Physical Sciences" data-price="449" data-desc="Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential programming skills." data-topics="Basic Physics, Chemistry/Electronics/CS, Calculus, Programming Skills">
+        
+        <div class="body">
+          <h3>B.Sc (Programme) Physical Sciences</h3>
+          <p>Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential **programming skills**.</p>
+        </div>
+        <div class="actions">
+          <button class="add-cart-btn">Add to Cart — ₹449</button>
+          <button class="view-btn" data-id="course-bsc-prog">View Details</button>
+        </div>
+      </article>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="courseDetails" style="display:none">
+  <div class="card-wrap">
+    <h2 id="courseTitle"></h2>
+    <p id="courseDesc" style="color:var(--muted)"></p>
+    <h3 style="margin-top:20px;color:var(--primary);font-size:1.4rem;">Topics Covered:</h3>
+    <ul id="courseTopics" style="padding-left:20px;color:var(--muted);list-style:disc;"></ul>
+    <h3 style="margin-top:20px;color:var(--primary);font-size:1.4rem;">Resources:</h3>
+    <ul style="padding-left:20px;color:var(--muted);list-style:disc;">
+      <li>High-Quality Video Lessons</li>
+      <li>Concise Revision Notes</li>
+      <li>Unlimited Practice Tests & Quizzes</li>
+    </ul>
+    <button class="add-cart-btn" id="detailsAddCart" style="margin-top:20px;padding:14px;">Add to Cart</button>
+    <a class="btn back-btn" onclick="showCourses()" style="margin-top:10px;background:var(--bg);color:var(--primary);border:1px solid var(--border-color);">Back to Courses</a>
+  </div>
+</section>
+
+<section class="section" id="signup">
+  <div class="card-wrap">
+    <h2>Get Started Today</h2>
+    <p style="color:var(--muted);margin-top:6px;font-size:1.05rem;">Sign up to save courses, track your progress, and access your personal dashboard.</p>
+    <div style="margin-top:24px">
+      <input id="suEmail" type="email" placeholder="Enter your Email address" />
+      <input id="suPass" type="password" placeholder="Create a strong Password" />
+      <div style="margin-top:16px">
+        <button id="createAccount" class="btn-primary">Create Your Free Account</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="card-wrap">
+    <h2>Why Choose Edura?</h2>
+    <p style="margin:0 0 40px;color:var(--muted);font-size:1.05rem;">We are designed to help university students learn efficiently — focus on results, not hours.</p>
+    <div class="features-container">
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Premium Courses Icon">
+        <h3>Premium Courses</h3>
+        <p>Structured, exam-oriented courses taught by experienced university tutors and subject matter experts.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" alt="Smart Notes Icon">
+        <h3>Smart Notes</h3>
+        <p>Concise summaries, formula sheets, and mind maps for rapid revision before exams and efficient learning.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2117/2117865.png" alt="Practice Tests Icon">
+        <h3>Targeted Practice</h3>
+        <p>Unlimited practice tests and quizzes that simulate the university exam environment for guaranteed success.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  &copy; 2025 Edura Learning. All rights reserved. | <a href="#" style="color:white;text-decoration:none;">Privacy Policy</a> | <a href="#" style="color:white;text-decoration:none;">Terms of Service</a>
+</footer>
+
+<script>
+  // --- Slideshow Script ---
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  function showSlides() {
+    slides.forEach((slide, i) => {
+      slide.classList.remove('show');
+      if (i === slideIndex) {
+        slide.classList.add('show');
+      }
+    });
+    slideIndex = (slideIndex + 1) % slides.length;
+    setTimeout(showSlides, 5000); // Change image every 5 seconds
+  }
+  showSlides();
+
+  // --- Course Visibility Toggle ---
+  const coursesList = document.getElementById('coursesList');
+  const revealBtn = document.getElementById('revealCoursesBtn');
+  const collapseBtn = document.getElementById('collapseCoursesBtn'); // New button reference
+
+  // Function to show courses and hide Explore button
+  function revealCourses() {
+    coursesList.style.display = 'grid'; // Show courses
+    revealBtn.style.display = 'none';   // Hide the explore button
+    collapseBtn.style.display = 'block';// Show the collapse button
+    document.getElementById('course-section-p').textContent = "Explore our complete university course catalog below:";
+    // Scroll to the courses section after revealing them
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
+  }
+
+  // Function to hide courses and show Explore button (New Function)
+  window.hideCourses = function() {
+    coursesList.style.display = 'none'; // Hide courses
+    revealBtn.style.display = 'block';  // Show the explore button
+    collapseBtn.style.display = 'none'; // Hide the collapse button
+    document.getElementById('course-section-p').textContent = "Choose a course to get started — all content focused for university exams.";
+    // Scroll to the courses section after collapsing them
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
+  }
+
+  // Event listener for the Explore button
+  revealBtn.addEventListener('click', revealCourses);
+
+
+  // --- Course Detail View Logic ---
+  const courseDetailsSection = document.getElementById('courseDetails');
+  const coursesCardWrap = document.getElementById('coursesCardWrap');
+
+  function showDetails(courseId) {
+    // 1. Find the corresponding course card
+    const card = document.querySelector(`.course-card[data-id="${courseId}"]`);
+    if (!card) return;
+
+    // 2. Hide the main course list and show the detail view
+    coursesCardWrap.style.display = 'none';
+    courseDetailsSection.style.display = 'block';
+    
+    // 3. Populate the details section
+    document.getElementById('courseTitle').textContent = card.dataset.title;
+    document.getElementById('courseDesc').textContent = card.dataset.desc;
+    
+    // Populate topics list
+    const topicsUl = document.getElementById('courseTopics');
+    topicsUl.innerHTML = '';
+    const topics = card.dataset.topics.split(',').map(t => t.trim());
+    topics.forEach(topic => {
+        const li = document.createElement('li');
+        li.textContent = topic;
+        topicsUl.appendChild(li);
+    });
+
+    // Update 'Add to Cart' button in details view
+    document.getElementById('detailsAddCart').onclick = () => {
+        addToCart({
+            id: card.dataset.id,
+            title: card.dataset.title,
+            price: parseInt(card.dataset.price),
+            img: 'placeholder'
+        });
+    };
+    // Scroll to the details section
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
+  }
+
+  // Function called by the 'Back to Courses' button
+  window.showCourses = function() {
+    coursesCardWrap.style.display = 'block';
+    courseDetailsSection.style.display = 'none';
+    // Scroll back to the top of the course section
+    document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Event listener for all "View Details" buttons
+  document.querySelectorAll('.view-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const courseId = e.target.dataset.id;
+      showDetails(courseId);
+    });
+  });
+
+  // --- Cart Functionality (Remains the same as before) ---
+  const cartDrawer = document.getElementById('cartDrawer');
+  const openCartBtn = document.getElementById('openCart');
+  const cartItemsContainer = document.getElementById('cartItems');
+  const cartCountBadge = document.getElementById('cartCount');
+  const cartTotalDisplay = document.getElementById('cartTotal');
+  const clearCartBtn = document.getElementById('clearCart');
+  let cart = JSON.parse(localStorage.getItem('eduraCart')) || [];
+
+  function updateCartUI() {
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<div style="padding:16px;color:var(--muted);text-align:center;">Your cart is empty.</div>';
+      cartCountBadge.style.display = 'none';
+      cartTotalDisplay.textContent = '₹0';
+      clearCartBtn.disabled = true;
+      document.getElementById('checkoutBtn').disabled = true;
+    } else {
+      cartItemsContainer.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <img src="placeholder" alt="${item.title}">
+          <div class="meta">
+            <h4>${item.title}</h4>
+            <p>₹${item.price}</p>
+          </div>
+          <button class="btn-outline" style="padding:6px 8px;font-size:12px;font-weight:700;" onclick="removeFromCart('${item.id}')">Remove</button>
+        </div>
+      `).join('');
+      
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      cartTotalDisplay.textContent = `₹${total}`;
+      cartCountBadge.textContent = cart.length;
+      cartCountBadge.style.display = 'flex';
+      clearCartBtn.disabled = false;
+      document.getElementById('checkoutBtn').disabled = false;
+    }
+    localStorage.setItem('eduraCart', JSON.stringify(cart));
+  }
+
+  function addToCart(course) {
+    if (cart.some(item => item.id === course.id)) {
+      alert(`${course.title} is already in your cart!`);
+      return;
+    }
+    cart.push(course);
+    updateCartUI();
+    cartDrawer.classList.add('open');
+    setTimeout(() => cartDrawer.classList.remove('open'), 1800);
+  }
+
+  window.removeFromCart = function(id) {
+    cart = cart.filter(item => item.id !== id);
+    updateCartUI();
+  };
+
+  clearCartBtn.addEventListener('click', () => {
+    cart = [];
+    updateCartUI();
+  });
+
+  openCartBtn.addEventListener('click', () => {
+    cartDrawer.classList.toggle('open');
+    cartDrawer.setAttribute('aria-hidden', cartDrawer.classList.contains('open') ? 'false' : 'true');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!cartDrawer.contains(e.target) && !openCartBtn.contains(e.target) && cartDrawer.classList.contains('open')) {
+      cartDrawer.classList.remove('open');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // Event listeners for "Add to Cart" buttons on course cards
+  document.querySelectorAll('.course-card .add-cart-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const card = e.target.closest('.course-card');
+      const course = {
+        id: card.dataset.id,
+        title: card.dataset.title,
+        price: parseInt(card.dataset.price),
+        img: 'placeholder' 
+      };
+      addToCart(course);
+    });
+  });
+
+  // Example functionality for signup button (purely illustrative)
+  document.getElementById('createAccount').addEventListener('click', () => {
+    const email = document.getElementById('suEmail').value;
+    const password = document.getElementById('suPass').value;
+    if (email.length > 5 && password.length > 5) {
+      alert(`Account created for: ${email}\n(In a real application, this would send data to a server)`);
+      document.getElementById('suEmail').value = '';
+      document.getElementById('suPass').value = '';
+    } else {
+      alert('Please enter a valid email and a password of at least 6 characters.');
+    }
+  });
+  
+  // Checkout functionality placeholder
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if(cart.length > 0) {
+        alert(`Proceeding to checkout for ${cartTotalDisplay.textContent}. Thank you for your purchase!`);
+      }
+  });
+
+  // Initial cart load
+  updateCartUI();
+
+</script>
+</body>
+</html>
