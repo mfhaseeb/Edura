@@ -29,6 +29,12 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
+    /* ACCESSIBILITY IMPROVEMENT: Focus Outline */
+    :focus {
+      outline: 2px solid var(--primary); 
+      outline-offset: 2px;
+    }
+    
     /* --- GLOBAL COMPONENTS --- */
     .btn{
       padding:12px 24px;
@@ -53,9 +59,11 @@
     header{
       position:sticky;top:0;z-index:1000;
       display:flex;align-items:center;justify-content:space-between;
-      padding:16px 40px; /* Increased padding */
-      background:var(--card);
-      box-shadow:var(--shadow-subtle); /* More subtle shadow */
+      padding:16px 40px; 
+      /* IMPLEMENTED TRANSPARENCY (95%) AND FROSTED GLASS EFFECT */
+      background:rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(4px); 
+      box-shadow:var(--shadow-subtle); 
       border-bottom:1px solid var(--border-color);
     }
     .brand{display:flex;align-items:center;gap:12px}
@@ -81,7 +89,7 @@
     }
     .cart-btn:hover{background:var(--border-color)}
     .cart-icon{width:24px;height:24px}
-    .cart-icon path, .cart-icon circle{stroke:var(--primary); fill:var(--primary);} /* Ensure SVG color matches primary */
+    .cart-icon path, .cart-icon circle{stroke:var(--primary); fill:var(--primary);} 
     .cart-badge{position:absolute;top:-4px;right:-4px;background:var(--accent);color:white;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;padding:2px;box-shadow:0 2px 6px rgba(255, 69, 0, 0.3);}
     
     /* --- CART DRAWER --- */
@@ -91,7 +99,6 @@
     .cart-drawer .items{padding:16px}
     .cart-item{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed var(--border-color)}
     .cart-item:last-child{border-bottom:0}
-    /* Set a placeholder style for image tags */
     .cart-item img{width:60px;height:44px;object-fit:cover;border-radius:4px;border:1px solid var(--border-color); background-color: var(--bg);} 
     .course-card img{width:100%;height:200px;object-fit:cover;display:block; background-color: var(--bg); border-bottom: 1px solid var(--border-color);}
 
@@ -104,7 +111,11 @@
     .slideshow{position:relative;height:70vh;overflow:hidden;margin-bottom:40px;}
     .slide{position:absolute;left:0;top:0;width:100%;height:100%;background-size:cover;background-position:center center;opacity:0;transition:opacity 1s ease-in-out;}
     .slide.show{opacity:1}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.5));}
+    .hero-overlay{
+        position:absolute;inset:0;
+        /* IMPLEMENTED TRANSPARENCY (reduced max darkness from 0.5 to 0.4) */
+        background:linear-gradient(180deg,rgba(0,0,0,0.1),rgba(0,0,0,0.4));
+    }
     .slideshow-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;color:white;text-align:center;padding:0 20px;text-shadow:0 4px 10px rgba(0,0,0,0.3);}
     .slideshow-content h1{font-size:3.2rem;margin:0 0 10px;line-height:1.1;font-weight:700;}
     .slideshow-content p{font-size:1.15rem;margin:0 0 24px;color:rgba(255,255,255,0.95);font-weight:400;}
@@ -117,7 +128,7 @@
     .section h2{font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:10px;}
     .card-wrap{
       background:var(--card);
-      padding:40px; /* Increased padding */
+      padding:40px; 
       border-radius:12px;
       box-shadow:var(--shadow-subtle);
       border:1px solid var(--border-color);
@@ -132,7 +143,7 @@
       box-shadow:var(--shadow-subtle);
       border:1px solid var(--border-color);
       display:flex;flex-direction:column;
-      transition:transform 0.3s;
+      transition:transform 0.3s ease-out, box-shadow 0.3s ease-out; 
       cursor:pointer;
     }
     .course-card:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,0,0,0.08);}
@@ -142,7 +153,7 @@
     .course-card .actions{
       padding:16px 20px;
       border-top:1px solid var(--border-color);
-      background:var(--bg); /* Light gray for separation */
+      background:var(--bg); 
       display:flex;gap:12px;
     }
     .add-cart-btn{flex:1;background:var(--accent);color:white;padding:12px;border-radius:8px;border:0;font-weight:600;cursor:pointer;transition:0.2s;}
@@ -158,6 +169,46 @@
       transition:0.2s;
     }
     .view-btn:hover{background:var(--border-color)}
+
+    /* --- ABOUT US STYLES --- */
+    .about-content {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .about-content .text {
+      flex: 2;
+    }
+    .about-content .text p{margin: 0;}
+    .about-content .stats {
+      flex: 1;
+      padding: 30px;
+      background: var(--bg);
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-color);
+    }
+    .stat-item {
+      padding: 15px 0;
+      border-bottom: 1px dashed var(--border-color);
+    }
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+    .stat-item h4 {
+      margin: 0 0 5px;
+      font-size: 2rem;
+      color: var(--accent);
+      font-weight: 700;
+      line-height: 1;
+    }
+    .stat-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
 
     /* --- SIGNUP --- */
     #signup.card-wrap{max-width:680px;margin:0 auto;text-align:center;padding:40px 60px;}
@@ -176,16 +227,35 @@
       border:1px solid var(--border-color);
       text-align:center;
       transition:0.2s;
+      min-height: 250px; 
     }
     .feature-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.08);}
     .feature-card img{width:64px;height:64px;margin-bottom:16px}
     .feature-card h3{margin:4px 0 8px;color:var(--primary);font-size:1.15rem;font-weight:600;}
     .feature-card p{color:var(--muted);font-size:0.9rem;}
 
+    /* --- FOOTER STYLES --- */
+    footer{
+        background: #1A1A1A;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.9rem;
+    }
+    footer a{color: var(--accent); text-decoration: none; transition: color 0.2s;}
+    footer a:hover{color: white;}
+    
     /* --- RESPONSIVE ADJUSTMENTS --- */
     @media (max-width:1024px){
       header{padding:14px 20px;}
       .slideshow-content h1{font-size:2.5rem}
+      .about-content {
+        flex-direction: column;
+      }
+      .about-content .stats {
+        width: 100%;
+        max-width: 400px; 
+      }
     }
     @media (max-width:768px){
       .slideshow{height:60vh;}
@@ -215,6 +285,7 @@
   </div>
   <nav>
     <a href="#home">Home</a>
+    <a href="#about">About</a> 
     <a href="#courses">Courses</a>
     <a href="#features">Features</a>
     <a href="#signup">Signup</a>
@@ -232,13 +303,13 @@
 </header>
 
 <section class="slideshow" id="home">
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop')"></div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop')"></div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop')"></div>
+  <div class="slide" style="background-image:url('images/slide1-university-campus.jpg')"></div>
+  <div class="slide" style="background-image:url('images/slide2-students-studying.jpg')"></div>
+  <div class="slide" style="background-image:url('images/slide3-lecture-hall.jpg')"></div>
   <div class="hero-overlay"></div>
   <div class="slideshow-content container">
     <h1>Learn Smarter. Achieve More.</h1>
-    <p>Your digital companion for university success — video lectures, comprehensive notes, and personalized practice tests.</p>
+    <p>Your digital companion for university success — video lectures, comprehensive notes, and personalized practice tests. <strong>Stop cramming, start understanding.</strong></p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
       <a class="btn" href="#courses">Explore Courses</a>
       <a class="btn hero-btn-secondary" href="#features">Why Edura?</a>
@@ -260,6 +331,38 @@
 
 <main class="container">
 
+<section class="section" id="about">
+  <div class="card-wrap">
+    <h2>Our Mission: Empowering University Students</h2>
+    <div class="about-content">
+      <div class="text">
+        <p style="font-size:1.05rem; color:#333;">
+          At <strong>Edura</strong>, we believe success in university shouldn't rely on rote memorization or outdated textbooks. Our platform is built on the philosophy of <strong>efficient, focused learning</strong>. We cut through the noise to deliver content specifically designed for your curriculum, helping you master complex topics with clarity and confidence.
+        </p>
+        <p style="color:var(--muted); margin-top: 15px;">
+          Founded by a team of academics and tech innovators, Edura bridges the gap between traditional teaching and modern digital access. We are committed to providing high-quality, affordable resources that fit the hectic schedule of a college student. Join thousands of students who are transforming their grades and achieving their academic goals with Edura.
+        </p>
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <h4>25K+</h4>
+          <p>Active Users</p>
+        </div>
+        <div class="stat-item">
+          <h4>4.8/5</h4>
+          <p>Average Course Rating</p>
+        </div>
+        <div class="stat-item">
+          <h4>92%</h4>
+          <p>Exam Success Rate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+---
+
 <section class="section" id="courses">
   <div class="card-wrap" id="coursesCardWrap">
     <h2>University Course Catalog</h2>
@@ -276,10 +379,10 @@
     <div class="courses" id="coursesList" style="display:none;">
 
       <article class="course-card" data-id="course-psyc" data-title="B.A. (Hons) Psychology" data-price="549" data-desc="Explore the mind: Foundations of Psychology, Social Behavior, Development, and Quantitative Methods for research." data-topics="Foundations of Psychology, Social Behavior, Development, Quantitative Methods">
-        
+        <img src="courses/psychology.jpg" alt="Illustrated diagram showing the core topics in Psychology like the brain, social interaction, and data analysis" loading="lazy">
         <div class="body">
           <h3>B.A. (Hons) Psychology</h3>
-          <p>Explore the mind: **Foundations of Psychology**, Social Behavior, Development, and Quantitative Methods for research.</p>
+          <p>Explore the mind: <strong>Foundations of Psychology</strong>, Social Behavior, Development, and Quantitative Methods for research.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹549</button>
@@ -288,10 +391,10 @@
       </article>
 
       <article class="course-card" data-id="course-bcom-hons" data-title="B.Com (Hons)" data-price="699" data-desc="Essential modules in Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, and Financial Management." data-topics="Financial Accounting, Corporate Law, Business Statistics, Income Tax Law, Financial Management">
-        
+        <img src="courses/bcom.jpg" alt="A calculator, pen, and stacks of currency, symbolizing Financial Accounting and Corporate Law." loading="lazy">
         <div class="body">
           <h3>B.Com (Hons)</h3>
-          <p>Essential modules in **Financial Accounting**, Corporate Law, Business Statistics, Income Tax Law, and Financial Management.</p>
+          <p>Essential modules in <strong>Financial Accounting</strong>, Corporate Law, Business Statistics, Income Tax Law, and Financial Management.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹699</button>
@@ -300,10 +403,10 @@
       </article>
 
       <article class="course-card" data-id="course-physics" data-title="B.Sc (Hons) Physics" data-price="599" data-desc="Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational Quantum Mechanics." data-topics="Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, Quantum Mechanics">
-        
+        <img src="courses/physics.jpg" alt="A conceptual drawing of a wave function and a particle, representing Quantum Mechanics and waves." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Physics</h3>
-          <p>Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational **Quantum Mechanics**.</p>
+          <p>Deep dive into Mathematical Physics, Mechanics, Optics, Electricity & Magnetism, and foundational <strong>Quantum Mechanics</strong>.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹599</button>
@@ -312,10 +415,10 @@
       </article>
 
       <article class="course-card" data-id="course-ps" data-title="B.A Political Science (Hons)" data-price="499" data-desc="Key topics including Indian Government & Politics, Political Theory, Comparative Politics, and International Relations." data-topics="Indian Government & Politics, Political Theory, Comparative Politics, International Relations">
-        
+        <img src="courses/polisci.jpg" alt="A gavel and constitution book, symbolizing Indian Government and Institutional Studies." loading="lazy">
         <div class="body">
           <h3>B.A Political Science (Hons)</h3>
-          <p>Key topics including **Indian Government & Politics**, Political Theory, Comparative Politics, and International Relations.</p>
+          <p>Key topics including <strong>Indian Government & Politics</strong>, Political Theory, Comparative Politics, and International Relations.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -324,10 +427,10 @@
       </article>
 
       <article class="course-card" data-id="course-chem" data-title="B.Sc (Hons) Chemistry" data-price="549" data-desc="Comprehensive coverage of Physical, Organic, and Inorganic Chemistry, including Spectroscopy and Thermodynamics." data-topics="Physical Chemistry, Organic Chemistry, Inorganic Chemistry, Spectroscopy, Thermodynamics">
-        
+        <img src="courses/chemistry.jpg" alt="Molecular diagrams and beakers with colorful solutions, representing Organic and Inorganic Chemistry." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Chemistry</h3>
-          <p>Comprehensive coverage of **Physical, Organic, and Inorganic Chemistry**, including Spectroscopy and Thermodynamics.</p>
+          <p>Comprehensive coverage of <strong>Physical, Organic, and Inorganic Chemistry</strong>, including Spectroscopy and Thermodynamics.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹549</button>
@@ -336,10 +439,10 @@
       </article>
 
       <article class="course-card" data-id="course-eco-hons" data-title="B.A Economics (Hons)" data-price="599" data-desc="Core modules in Micro, Macro, Mathematical Methods, Statistics & Econometrics, and Development Economics." data-topics="Microeconomics, Macroeconomics, Mathematical Methods, Statistics & Econometrics, Development Economics">
-        
+        <img src="courses/economics.jpg" alt="Supply and demand charts with mathematical formulas, highlighting Micro and Macro Economics." loading="lazy">
         <div class="body">
           <h3>B.A Economics (Hons)</h3>
-          <p>Core modules in **Micro, Macro**, Mathematical Methods, Statistics & Econometrics, and Development Economics.</p>
+          <p>Core modules in <strong>Micro, Macro</strong>, Mathematical Methods, Statistics & Econometrics, and Development Economics.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹599</button>
@@ -348,13 +451,10 @@
       </article>
 
       <article class="course-card" data-id="course-buseco" data-title="B.A. (Hons) Business Economics" data-price="649" data-desc="Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate Business Strategy." data-topics="Business Statistics, International Trade, Financial Markets, Business Strategy">
-        
-
-[Image of B.A. (Hons) Business Economics strategy and markets]
-
+        <img src="courses/buseco.jpg" alt="A chessboard and bar charts, representing Business Strategy and Financial Markets." loading="lazy">
         <div class="body">
           <h3>B.A. (Hons) Business Economics</h3>
-          <p>Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate **Business Strategy**.</p>
+          <p>Specialized modules in Business Statistics, International Trade, Financial Markets, and corporate <strong>Business Strategy</strong>.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹649</button>
@@ -363,13 +463,10 @@
       </article>
 
       <article class="course-card" data-id="course-zoology" data-title="B.Sc (Hons) Zoology" data-price="499" data-desc="Core concepts in Cell Biology, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals." data-topics="Cell Biology, Genetics, Animal Physiology, Ecology, Development">
-        
-
-[Image of B.Sc (Hons) Zoology Cell Biology and Genetics]
-
+        <img src="courses/zoology.jpg" alt="A magnified image of a biological cell and a DNA double helix, symbolizing Cell Biology and Genetics." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Zoology</h3>
-          <p>Core concepts in **Cell Biology**, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals.</p>
+          <p>Core concepts in <strong>Cell Biology</strong>, Genetics, Animal Physiology, Ecology, Development, and Lab Practicals.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -378,10 +475,10 @@
       </article>
 
       <article class="course-card" data-id="course-his" data-title="B.A History (Hons)" data-price="449" data-desc="Detailed studies on Ancient, Medieval, and Modern India, along with World History and Historiography." data-topics="Ancient India, Medieval India, Modern India, World History, Historiography">
-        
+        <img src="courses/history.jpg" alt="Ancient scrolls, pyramids, and a historical timeline, representing the study of Ancient and Modern India." loading="lazy">
         <div class="body">
           <h3>B.A History (Hons)</h3>
-          <p>Detailed studies on **Ancient, Medieval, and Modern India**, along with World History and Historiography.</p>
+          <p>Detailed studies on <strong>Ancient, Medieval, and Modern India</strong>, along with World History and Historiography.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹449</button>
@@ -390,10 +487,10 @@
       </article>
 
       <article class="course-card" data-id="course-envsci" data-title="B.Sc (Hons) Environmental Science" data-price="499" data-desc="Modules on Environmental Chemistry, Ecology, Climate Change, Pollution Studies, and Biodiversity Conservation." data-topics="Environmental Chemistry, Ecology, Climate Change, Pollution Studies, Biodiversity Conservation">
-        
+        <img src="courses/envsci.jpg" alt="A stylized image of a wind turbine and green landscape, focusing on Climate Change and Ecology." loading="lazy">
         <div class="body">
           <h3>B.Sc (Hons) Environmental Science</h3>
-          <p>Modules on Environmental Chemistry, Ecology, **Climate Change**, Pollution Studies, and Biodiversity Conservation.</p>
+          <p>Modules on Environmental Chemistry, Ecology, <strong>Climate Change</strong>, Pollution Studies, and Biodiversity Conservation.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹499</button>
@@ -402,10 +499,10 @@
       </article>
       
       <article class="course-card" data-id="course-baprog-eco" data-title="B.A. (Programme) Economics" data-price="399" data-desc="Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and Money & Banking." data-topics="Microeconomics, Macroeconomics, Indian Economy, Money & Banking">
-        
+        <img src="courses/ba-prog-eco.jpg" alt="A stack of Indian currency notes and coins, symbolizing the Indian Economy and Money & Banking." loading="lazy">
         <div class="body">
           <h3>B.A. (Programme) Economics</h3>
-          <p>Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and **Money & Banking**.</p>
+          <p>Concise introductory modules covering Microeconomics, Macroeconomics, Indian Economy, and <strong>Money & Banking</strong>.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹399</button>
@@ -414,21 +511,21 @@
       </article>
       
       <article class="course-card" data-id="course-bsc-prog" data-title="B.Sc (Programme) Physical Sciences" data-price="449" data-desc="Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential programming skills." data-topics="Basic Physics, Chemistry/Electronics/CS, Calculus, Programming Skills">
-        
+        <img src="courses/bsc-prog.jpg" alt="A computer screen showing code and a circuit board, representing Programming Skills and Electronics." loading="lazy">
         <div class="body">
           <h3>B.Sc (Programme) Physical Sciences</h3>
-          <p>Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential **programming skills**.</p>
+          <p>Foundational courses in Basic Physics, Chemistry/Electronics/CS, Calculus, and essential <strong>programming skills</strong>.</p>
         </div>
         <div class="actions">
           <button class="add-cart-btn">Add to Cart — ₹449</button>
           <button class="view-btn" data-id="course-bsc-prog">View Details</button>
         </div>
       </article>
-
-
     </div>
   </div>
 </section>
+
+---
 
 <section class="section" id="courseDetails" style="display:none">
   <div class="card-wrap">
@@ -447,6 +544,34 @@
   </div>
 </section>
 
+---
+
+<section class="section" id="features">
+  <div class="card-wrap">
+    <h2>Why Choose Edura?</h2>
+    <p style="margin:0 0 40px;color:var(--muted);font-size:1.05rem;">We are designed to help university students learn efficiently — focus on results, not hours.</p>
+    <div class="features-container">
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Premium Courses Icon" loading="lazy">
+        <h3>Premium Courses</h3>
+        <p>Structured, <strong>exam-oriented courses</strong> taught by experienced university tutors and subject matter experts. Full syllabus coverage guaranteed.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" alt="Smart Notes & Videos" loading="lazy">
+        <h3>Smart Notes & Videos</h3>
+        <p>Concise summaries, formula sheets, and mind maps for rapid revision before exams. Every note is linked to a <strong>high-quality video lecture</strong>.</p>
+      </div>
+      <div class="feature-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2117/2117865.png" alt="Practice Tests Icon" loading="lazy">
+        <h3>Targeted Practice</h3>
+        <p>Unlimited practice tests and quizzes that simulate the university exam environment for guaranteed success. <strong>Track your weak points</strong> and improve efficiently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+---
+
 <section class="section" id="signup">
   <div class="card-wrap">
     <h2>Get Started Today</h2>
@@ -461,34 +586,10 @@
   </div>
 </section>
 
-<section class="section" id="features">
-  <div class="card-wrap">
-    <h2>Why Choose Edura?</h2>
-    <p style="margin:0 0 40px;color:var(--muted);font-size:1.05rem;">We are designed to help university students learn efficiently — focus on results, not hours.</p>
-    <div class="features-container">
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Premium Courses Icon">
-        <h3>Premium Courses</h3>
-        <p>Structured, exam-oriented courses taught by experienced university tutors and subject matter experts.</p>
-      </div>
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png" alt="Smart Notes Icon">
-        <h3>Smart Notes</h3>
-        <p>Concise summaries, formula sheets, and mind maps for rapid revision before exams and efficient learning.</p>
-      </div>
-      <div class="feature-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2117/2117865.png" alt="Practice Tests Icon">
-        <h3>Targeted Practice</h3>
-        <p>Unlimited practice tests and quizzes that simulate the university exam environment for guaranteed success.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer>
-  &copy; 2025 Edura Learning. All rights reserved. | <a href="#" style="color:white;text-decoration:none;">Privacy Policy</a> | <a href="#" style="color:white;text-decoration:none;">Terms of Service</a>
+  &copy; 2025 Edura Learning. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | Logo Reference: image_f9dec7.png
 </footer>
 
 <script>
@@ -510,25 +611,23 @@
   // --- Course Visibility Toggle ---
   const coursesList = document.getElementById('coursesList');
   const revealBtn = document.getElementById('revealCoursesBtn');
-  const collapseBtn = document.getElementById('collapseCoursesBtn'); // New button reference
+  const collapseBtn = document.getElementById('collapseCoursesBtn'); 
 
   // Function to show courses and hide Explore button
   function revealCourses() {
-    coursesList.style.display = 'grid'; // Show courses
-    revealBtn.style.display = 'none';   // Hide the explore button
-    collapseBtn.style.display = 'block';// Show the collapse button
+    coursesList.style.display = 'grid'; 
+    revealBtn.style.display = 'none';   
+    collapseBtn.style.display = 'block';
     document.getElementById('course-section-p').textContent = "Explore our complete university course catalog below:";
-    // Scroll to the courses section after revealing them
     document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
   }
 
-  // Function to hide courses and show Explore button (New Function)
+  // Function to hide courses and show Explore button
   window.hideCourses = function() {
-    coursesList.style.display = 'none'; // Hide courses
-    revealBtn.style.display = 'block';  // Show the explore button
-    collapseBtn.style.display = 'none'; // Hide the collapse button
+    coursesList.style.display = 'none'; 
+    revealBtn.style.display = 'block';  
+    collapseBtn.style.display = 'none'; 
     document.getElementById('course-section-p').textContent = "Choose a course to get started — all content focused for university exams.";
-    // Scroll to the courses section after collapsing them
     document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
   }
 
@@ -541,19 +640,15 @@
   const coursesCardWrap = document.getElementById('coursesCardWrap');
 
   function showDetails(courseId) {
-    // 1. Find the corresponding course card
     const card = document.querySelector(`.course-card[data-id="${courseId}"]`);
     if (!card) return;
 
-    // 2. Hide the main course list and show the detail view
     coursesCardWrap.style.display = 'none';
     courseDetailsSection.style.display = 'block';
     
-    // 3. Populate the details section
     document.getElementById('courseTitle').textContent = card.dataset.title;
     document.getElementById('courseDesc').textContent = card.dataset.desc;
     
-    // Populate topics list
     const topicsUl = document.getElementById('courseTopics');
     topicsUl.innerHTML = '';
     const topics = card.dataset.topics.split(',').map(t => t.trim());
@@ -563,7 +658,6 @@
         topicsUl.appendChild(li);
     });
 
-    // Update 'Add to Cart' button in details view
     document.getElementById('detailsAddCart').onclick = () => {
         addToCart({
             id: card.dataset.id,
@@ -572,7 +666,6 @@
             img: 'placeholder'
         });
     };
-    // Scroll to the details section
     document.getElementById('courses').scrollIntoView({ behavior: 'smooth' }); 
   }
 
@@ -580,7 +673,6 @@
   window.showCourses = function() {
     coursesCardWrap.style.display = 'block';
     courseDetailsSection.style.display = 'none';
-    // Scroll back to the top of the course section
     document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -592,7 +684,7 @@
     });
   });
 
-  // --- Cart Functionality (Remains the same as before) ---
+  // --- Cart Functionality ---
   const cartDrawer = document.getElementById('cartDrawer');
   const openCartBtn = document.getElementById('openCart');
   const cartItemsContainer = document.getElementById('cartItems');
@@ -611,7 +703,7 @@
     } else {
       cartItemsContainer.innerHTML = cart.map(item => `
         <div class="cart-item">
-          <img src="placeholder" alt="${item.title}">
+          <img src="placeholder" alt="Thumbnail for ${item.title}">
           <div class="meta">
             <h4>${item.title}</h4>
             <p>₹${item.price}</p>
@@ -663,7 +755,6 @@
     }
   });
 
-  // Event listeners for "Add to Cart" buttons on course cards
   document.querySelectorAll('.course-card .add-cart-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       const card = e.target.closest('.course-card');
@@ -677,7 +768,6 @@
     });
   });
 
-  // Example functionality for signup button (purely illustrative)
   document.getElementById('createAccount').addEventListener('click', () => {
     const email = document.getElementById('suEmail').value;
     const password = document.getElementById('suPass').value;
@@ -690,7 +780,6 @@
     }
   });
   
-  // Checkout functionality placeholder
   document.getElementById('checkoutBtn').addEventListener('click', () => {
       if(cart.length > 0) {
         alert(`Proceeding to checkout for ${cartTotalDisplay.textContent}. Thank you for your purchase!`);
