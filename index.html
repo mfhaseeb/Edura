@@ -27,6 +27,7 @@
       line-height:1.6;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+      position: relative;
     }
 
     /* ACCESSIBILITY IMPROVEMENT: Focus Outline */
@@ -220,7 +221,59 @@
       background-size: cover;
       background-position: center;
       transition: background-image 1.5s ease-in-out;
-      opacity: 0.03;
+      /* INCREASED OPACITY FROM 3% TO 15% */
+      opacity: 0.15;
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact-info {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: var(--radius-default);
+      border: 1px solid var(--border-color);
+    }
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 15px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+    }
+    .contact-item h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+    .contact-item p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .contact-item a:hover {
+      color: var(--primary);
     }
 
     /* --- SIGNUP --- */
@@ -278,6 +331,14 @@
       .features-container{flex-direction:column;align-items:center}
       #signup.card-wrap{padding:30px 20px;}
       .cart-drawer{right:12px;left:12px;width:auto}
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      .contact-item {
+        width: 100%;
+        max-width: 300px;
+      }
     }
     @media (max-width:600px){
       header{flex-wrap:wrap;justify-content:center;gap:12px;}
@@ -303,6 +364,7 @@
     <a href="#about">About</a> 
     <a href="#courses">Courses</a>
     <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
     <a href="#signup">Signup</a>
     <div class="cart-wrap">
       <button class="cart-btn" id="openCart" aria-label="Open cart">
@@ -674,6 +736,52 @@
           <h4 style="color: var(--accent); margin-bottom: 8px;">3. Master</h4>
           <p style="font-size: 0.9rem; color: var(--muted); margin: 0;">Reinforce learning with revision tools and mock exams</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+---
+
+<section class="section" id="contact">
+  <div class="card-wrap">
+    <h2>Contact Us</h2>
+    <p style="margin:0 0 30px;color:var(--muted);font-size:1.05rem;">Have questions or need assistance? We're here to help you succeed in your academic journey.</p>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <h3>Phone</h3>
+        <p><a href="tel:98916758181">+91 98916 758181</a></p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Available Mon-Sat, 9AM-6PM</p>
+      </div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <h3>Email</h3>
+        <p><a href="mailto:faisaletg02@gmail.com">faisaletg02@gmail.com</a></p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">We respond within 24 hours</p>
+      </div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <h3>Live Chat</h3>
+        <p>Available on website</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Instant support during business hours</p>
+      </div>
+    </div>
+    
+    <div style="margin-top: 40px; padding: 20px; background-color: var(--bg); border-radius: var(--radius-default);">
+      <h3 style="color: var(--primary); margin-top: 0;">Frequently Asked Questions</h3>
+      <div style="margin-top: 15px;">
+        <h4 style="color: var(--accent); margin-bottom: 8px;">How do I access my courses after purchase?</h4>
+        <p style="color: var(--muted); margin: 0 0 15px;">After completing your purchase, you'll receive an email with login credentials and instructions to access your courses through our learning portal.</p>
+        
+        <h4 style="color: var(--accent); margin-bottom: 8px;">Can I get a refund if I'm not satisfied?</h4>
+        <p style="color: var(--muted); margin: 0 0 15px;">Yes, we offer a 30-day money-back guarantee if you're not satisfied with our courses. Contact our support team for assistance.</p>
+        
+        <h4 style="color: var(--accent); margin-bottom: 8px;">Do you offer institutional discounts?</h4>
+        <p style="color: var(--muted); margin: 0;">Yes, we provide special pricing for educational institutions and group enrollments. Contact us for more information.</p>
       </div>
     </div>
   </div>
